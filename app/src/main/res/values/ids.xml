@@ -2,4 +2,7 @@
 <resources>
     <item name="drawer" type="id" />
     <item name="navView" type="id" />
+    <item name="imgUserAvatar" type="id" />
+    <item name="txtUserName" type="id" />
+    <item name="txtUserEmail" type="id" />
 </resources>
