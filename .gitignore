@@ -8,4 +8,4 @@ gradlew*
 /build
 /captures
 .externalNativeBuild
-/gradle.properties
+
