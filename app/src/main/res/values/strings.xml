@@ -3,4 +3,6 @@
     <string name="nav_drawer_open">open</string>
     <string name="nav_drawer_close">close</string>
     <string name="fish_username">John Doe</string>
+    <string name="btn_login">Log In</string>
+    <string name="login_options_or">or</string>
 </resources>

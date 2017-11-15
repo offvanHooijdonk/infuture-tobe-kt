@@ -5,4 +5,5 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="nav_avatar_size">64dp</dimen>
+    <dimen name="login_logo_size">80dp</dimen>
 </resources>
