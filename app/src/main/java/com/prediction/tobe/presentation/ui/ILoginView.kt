@@ -1,3 +1,5 @@
 package com.prediction.tobe.presentation.ui
 
-interface ILoginView
+interface ILoginView {
+    fun proceedAsLogged()
+}

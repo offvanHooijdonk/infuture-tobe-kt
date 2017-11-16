@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.prediction.tobe.R
 import com.prediction.tobe.getLoginComponent
 import com.prediction.tobe.presentation.presenter.ILoginPresenter
+import org.jetbrains.anko.longToast
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity(), ILoginView {
@@ -16,5 +17,11 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         setContentView(R.layout.activity_login)
 
         getLoginComponent().inject(this)
+
+        presenter.onViewCreated()
+    }
+
+    override fun proceedAsLogged() {
+        longToast("Works!")
     }
 }
