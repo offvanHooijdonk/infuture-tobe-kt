@@ -12,9 +12,9 @@ class AppToBe : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        graph = DaggerAppComponent.builder().build()
+        graph = DaggerAppComponent.create()
     }
 
 
 }
-fun getLoginComponent() = AppToBe.graph.plusAuthComponent().plusLoginComponent()
+//fun getLoginComponent() = AppToBe.graph.plusAuthComponent(AuthModule()).plusLoginComponent(LoginModule())
