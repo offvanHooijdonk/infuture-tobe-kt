@@ -9,4 +9,6 @@ class AuthInteractor @Inject constructor() {
     lateinit var authUtil: FireBaseAuthUtil
 
     fun getCurrentUser(): FirebaseUser? = authUtil.getCurrentUser()
+
+    fun getAuthApiClientBuilder() = authUtil.getAuthApiClientBuilder()
 }

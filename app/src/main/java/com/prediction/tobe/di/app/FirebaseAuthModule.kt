@@ -9,5 +9,5 @@ import javax.inject.Singleton
 class FirebaseAuthModule {
     @Provides
     @Singleton
-    fun provideFirebaseAuth() = FirebaseAuth.getInstance()
+    fun provideFirebaseAuth() = FirebaseAuth.getInstance()!!
 }
