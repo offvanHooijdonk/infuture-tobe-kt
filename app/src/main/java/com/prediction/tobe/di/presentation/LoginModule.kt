@@ -9,7 +9,7 @@ import dagger.Provides
 class LoginModule {
     @Provides
     @LoginScope
-    fun provideLoginPresenter(): LoginPresenter /*LoginPresenter*/ = LoginPresenter()
+    fun provideLoginPresenter(): LoginPresenter = LoginPresenter()
 
     @Provides
     @LoginScope
