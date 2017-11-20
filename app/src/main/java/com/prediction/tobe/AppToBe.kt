@@ -2,6 +2,7 @@ package com.prediction.tobe
 
 import android.app.Application
 import com.prediction.tobe.di.AppComponent
+import com.prediction.tobe.di.AppModule
 import com.prediction.tobe.di.DaggerAppComponent
 
 class AppToBe : Application() {
@@ -12,7 +13,7 @@ class AppToBe : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        graph = DaggerAppComponent.create()
+        graph = DaggerAppComponent.builder().appModule(AppModule(this)).build()
     }
 
 
