@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        AppToBe.graph.inject(this)
+        AppToBe.di.loginComponent().inject(this)
 
         presenter.attachView(this)
     }

@@ -1,19 +1,17 @@
 package com.prediction.tobe
 
 import android.app.Application
-import com.prediction.tobe.di.AppComponent
-import com.prediction.tobe.di.AppModule
-import com.prediction.tobe.di.DaggerAppComponent
+import com.prediction.tobe.di.DependencyManager
 
 class AppToBe : Application() {
 
     companion object {
-        @JvmStatic lateinit var graph: AppComponent
+        @JvmStatic lateinit var di: DependencyManager
     }
     override fun onCreate() {
         super.onCreate()
 
-        graph = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+        di = DependencyManager(this)
     }
 
 
