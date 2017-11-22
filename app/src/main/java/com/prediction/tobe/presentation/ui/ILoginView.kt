@@ -4,8 +4,10 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 
 interface ILoginView {
-    fun proceedAsLogged()
+    fun navigateToMain()
     fun showAuthOptions(show: Boolean)
     fun startGoogleAuthView(apiClient: GoogleApiClient)
     fun onConnectionFailed(connectionResult: ConnectionResult)
+    fun showAuthProgress(show: Boolean)
+    fun showUserNotFound()
 }

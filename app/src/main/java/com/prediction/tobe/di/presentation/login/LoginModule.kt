@@ -1,4 +1,4 @@
-package com.prediction.tobe.di.presentation
+package com.prediction.tobe.di.presentation.login
 
 import com.prediction.tobe.data.interactor.AuthInteractor
 import com.prediction.tobe.presentation.presenter.LoginPresenter

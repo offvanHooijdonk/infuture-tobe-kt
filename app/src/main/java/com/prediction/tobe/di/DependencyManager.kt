@@ -1,16 +1,25 @@
 package com.prediction.tobe.di
 
 import android.content.Context
-import com.prediction.tobe.di.app.AppComponent
-import com.prediction.tobe.di.app.AppModule
-import com.prediction.tobe.di.app.DaggerAppComponent
-import com.prediction.tobe.di.presentation.LoginComponent
-import com.prediction.tobe.di.presentation.LoginModule
+import com.prediction.tobe.di.app.*
+import com.prediction.tobe.di.presentation.login.LoginComponent
+import com.prediction.tobe.di.presentation.login.LoginModule
+import com.prediction.tobe.di.presentation.main.MainComponent
+import com.prediction.tobe.di.presentation.main.MainModule
 import com.prediction.tobe.di.uitl.AuthModule
 
 class DependencyManager(ctx: Context) {
-    private val graph: AppComponent = DaggerAppComponent.builder().appModule(AppModule(ctx)).build()
+    companion object {
+        const val DB_USERS = "database_reference_users"
+    }
+
+    private val graph: AppComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(ctx))
+            .firebaseAuthModule(FirebaseAuthModule())
+            .firebaseDBModule(FirebaseDBModule())
+            .build()
 
     fun loginComponent(): LoginComponent = graph.plusAuthComponent(AuthModule()).plusLoginComponent(LoginModule())
 
+    fun mainComponent(): MainComponent = graph.plusMainComponent(MainModule())
 }

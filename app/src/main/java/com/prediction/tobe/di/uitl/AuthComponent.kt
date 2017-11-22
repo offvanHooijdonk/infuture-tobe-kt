@@ -1,7 +1,7 @@
 package com.prediction.tobe.di.uitl
 
-import com.prediction.tobe.di.presentation.LoginComponent
-import com.prediction.tobe.di.presentation.LoginModule
+import com.prediction.tobe.di.presentation.login.LoginComponent
+import com.prediction.tobe.di.presentation.login.LoginModule
 import dagger.Subcomponent
 
 @UtilScope

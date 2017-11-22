@@ -1,7 +1,7 @@
-package com.prediction.tobe.di.presentation
+package com.prediction.tobe.di.presentation.main
 
 import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class LoginScope
+annotation class MainScope

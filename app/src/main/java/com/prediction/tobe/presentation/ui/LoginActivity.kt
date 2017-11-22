@@ -1,5 +1,7 @@
 package com.prediction.tobe.presentation.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -10,14 +12,17 @@ import com.prediction.tobe.AppToBe
 import com.prediction.tobe.R
 import com.prediction.tobe.presentation.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.longToast
+import org.jetbrains.anko.okButton
 import javax.inject.Inject
 
 
-
 class LoginActivity : AppCompatActivity(), ILoginView {
-    @Suppress("CONST_VAL_NOT_TOP_LEVEL_OR_OBJECT")
-    private const val RC_SIGN_IN: Int = 10001
+
+    companion object {
+        private const val RC_SIGN_IN = 10001
+    }
 
     @Inject
     lateinit var presenter: LoginPresenter
@@ -28,12 +33,16 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
         AppToBe.di.loginComponent().inject(this)
 
-        presenter.attachView(this)
-        presenter.onViewCreated()
+        showAuthOptions(false)
 
         btnGoogleAccount.setOnClickListener({
             presenter.onGoogleAuthSelected()
         })
+
+        presenter.attachView(this)
+        presenter.onViewCreated()
+
+
     }
 
     override fun showAuthOptions(show: Boolean) {
@@ -51,11 +60,38 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    override fun proceedAsLogged() {
-        longToast("Works!")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == RC_SIGN_IN) {
+            presenter.onGoogleAuthReturn(data);
+        }
+    }
+
+    override fun showAuthProgress(show: Boolean) {
+        if (show) {
+            btnGoogleAccount.isEnabled = false
+            btnChooseLogin.isEnabled = false
+            prbLogin.visibility = View.VISIBLE
+        } else {
+            btnGoogleAccount.isEnabled = false
+            btnChooseLogin.isEnabled = false
+            prbLogin.visibility = View.INVISIBLE
+        }
+    }
+
+    override fun navigateToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
         longToast("Connection Error " + connectionResult.errorMessage)
+    }
+
+    override fun showUserNotFound() {
+        alert("User you are trying to sign in with is not found. Try to login again.", "") {
+            okButton {  }
+        }
     }
 }
