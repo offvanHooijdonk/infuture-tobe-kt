@@ -8,7 +8,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AppModule::class, FirebaseAuthModule::class, FirebaseDBModule::class))
+@Component(modules = arrayOf(AppModule::class, FirebaseAuthModule::class, FirebaseDBModule::class, DaoModule::class))
 interface AppComponent {
 
     fun plusAuthComponent(authModule: AuthModule): AuthComponent

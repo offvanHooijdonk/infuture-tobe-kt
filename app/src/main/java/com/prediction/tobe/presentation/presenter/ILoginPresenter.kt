@@ -1,7 +1,7 @@
 package com.prediction.tobe.presentation.presenter
 
 import android.content.Intent
-import com.prediction.tobe.presentation.ui.ILoginView
+import com.prediction.tobe.presentation.ui.login.ILoginView
 
 interface ILoginPresenter {
     fun onViewCreated()

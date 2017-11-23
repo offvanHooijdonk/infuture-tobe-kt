@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Вангую</string>
+    <string name="fish_username">Вася Пупкин</string>
+    <string name="btn_login">Войти</string>
+    <string name="login_options_or">или</string>
+    <string name="title_login_failed">Ошибка входа</string>
+    <string name="msg_login_failed">Ваш пользователь не найден. Попробуйте войти снова.</string>
+    <string name="msg_log_out_confirm">Вы уверены, что хотите выйти?</string>
+    <string name="title_log_out_confirm">Выйти</string>
+    <string name="nav_log_out">Выйти</string>
+    <string name="nav_predict_list">События</string>
+</resources>

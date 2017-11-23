@@ -16,6 +16,7 @@ class DependencyManager(ctx: Context) {
     private val graph: AppComponent = DaggerAppComponent.builder()
             .appModule(AppModule(ctx))
             .firebaseAuthModule(FirebaseAuthModule())
+            .daoModule(DaoModule())
             .firebaseDBModule(FirebaseDBModule())
             .build()
 

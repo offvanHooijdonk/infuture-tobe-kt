@@ -1,4 +1,4 @@
-package com.prediction.tobe.presentation.ui
+package com.prediction.tobe.presentation.ui.login
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.prediction.tobe.AppToBe
 import com.prediction.tobe.R
 import com.prediction.tobe.presentation.presenter.LoginPresenter
+import com.prediction.tobe.presentation.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.longToast
@@ -41,7 +42,6 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
         presenter.attachView(this)
         presenter.onViewCreated()
-
 
     }
 
@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     }
 
     override fun showUserNotFound() {
-        alert("User you are trying to sign in with is not found. Try to login again.", "") {
+        alert(getString(R.string.msg_login_failed), getString(R.string.title_login_failed)) {
             okButton {  }
         }
     }

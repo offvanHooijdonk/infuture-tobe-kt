@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.prediction.tobe.data.db.firebase.UserNotFoundException
 import com.prediction.tobe.data.interactor.AuthInteractor
 import com.prediction.tobe.domain.UserBean
-import com.prediction.tobe.presentation.ui.ILoginView
+import com.prediction.tobe.presentation.ui.login.ILoginView
 import com.prediction.tobe.session.SessionHelper
 import javax.inject.Inject
 

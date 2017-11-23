@@ -22,8 +22,6 @@ class FireBaseAuthUtil @Inject constructor() {
     lateinit var ctx: Context
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
-    /*@Inject
-    lateinit var authClientBuilder: GoogleApiClient.Builder*/
 
     fun getSignInOptions(): GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(ctx.getString(R.string.web_client_id))

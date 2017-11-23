@@ -5,21 +5,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.prediction.tobe.data.auth.FireBaseAuthUtil
-import com.prediction.tobe.data.db.firebase.UserNotFoundException
-import com.prediction.tobe.di.DependencyManager
+import com.prediction.tobe.data.db.firebase.IUserDao
 import com.prediction.tobe.domain.UserBean
 import com.prediction.tobe.session.SessionHelper
 import rx.Observable
 import rx.subjects.PublishSubject
 import java.lang.Exception
 import javax.inject.Inject
-import javax.inject.Named
-
 
 class AuthInteractor @Inject constructor() {
     @Inject
@@ -31,8 +24,8 @@ class AuthInteractor @Inject constructor() {
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
 
-    @field:[Inject Named(DependencyManager.DB_USERS)]
-    lateinit var userDB: DatabaseReference
+    @Inject
+    lateinit var userDao: IUserDao
 
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
@@ -63,27 +56,8 @@ class AuthInteractor @Inject constructor() {
         firebaseAuth.signOut()
     }
 
-    private fun loadUserInfoById(userId: String) : Observable<UserBean> {
-        val subjectUser: PublishSubject<UserBean> = PublishSubject.create()
-
-        userDB.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                if (dataSnapshot != null && dataSnapshot.exists()) {
-                    val userFound: UserBean? = dataSnapshot.getValue(UserBean::class.java)
-                    if (userFound != null) {
-                        session.user = userFound
-                        subjectUser.onNext(userFound)
-                    }
-                } else {
-                    subjectUser.onError(UserNotFoundException("User Data Snapshot does not exist!"))
-                }
-            }
-            override fun onCancelled(err: DatabaseError?) {
-                subjectUser.onError(err?.toException())
-            }
-        })
-        return subjectUser
-    }
+    private fun loadUserInfoById(userId: String) : Observable<UserBean> =
+            userDao.getUserById(userId).doOnNext { session.user = it }
 
     // todo move this to a Model Converter
     private fun toUserBean(fu: FirebaseUser): UserBean =
@@ -92,12 +66,6 @@ class AuthInteractor @Inject constructor() {
     private fun <T> excAsObservable(exception: Exception): Observable<T> =
             PublishSubject.error(exception)
 
-    private fun updateUserInDB(userBean: UserBean): Observable<UserBean> {
-        val subjectUser: PublishSubject<UserBean> = PublishSubject.create()
-        userDB.child(userBean.id).setValue(userBean).addOnCompleteListener {
-            session.user = userBean
-            subjectUser.onNext(userBean)
-        }
-        return subjectUser
-    }
+    private fun updateUserInDB(userBean: UserBean): Observable<UserBean> =
+            userDao.updateUserInDB(userBean).doOnNext { session.user = it }
 }

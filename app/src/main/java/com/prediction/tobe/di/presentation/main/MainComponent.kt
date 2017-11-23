@@ -1,6 +1,6 @@
 package com.prediction.tobe.di.presentation.main
 
-import com.prediction.tobe.presentation.ui.MainActivity
+import com.prediction.tobe.presentation.ui.main.MainActivity
 import dagger.Subcomponent
 
 @MainScope

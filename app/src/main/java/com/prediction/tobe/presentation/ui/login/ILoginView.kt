@@ -1,4 +1,4 @@
-package com.prediction.tobe.presentation.ui
+package com.prediction.tobe.presentation.ui.login
 
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient

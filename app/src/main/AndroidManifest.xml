@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".presentation.ui.MainActivity"
+            android:name=".presentation.ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!--<intent-filter>
@@ -21,7 +21,7 @@
             </intent-filter>-->
         </activity>
         <activity
-            android:name=".presentation.ui.LoginActivity"
+            android:name=".presentation.ui.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

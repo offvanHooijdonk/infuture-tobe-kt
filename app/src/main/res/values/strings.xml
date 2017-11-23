@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">To Be</string>
-    <string name="nav_drawer_open">open</string>
-    <string name="nav_drawer_close">close</string>
+    <string name="nav_drawer_open" translatable="false">open</string>
+    <string name="nav_drawer_close" translatable="false">close</string>
     <string name="fish_username">John Doe</string>
     <string name="btn_login">Log In</string>
     <string name="login_options_or">or</string>
-    <string name="web_client_id">6927320204-qs5d0fn8qluksg8ktv72s4f38jrjrjra.apps.googleusercontent.com</string>
+    <string name="web_client_id" translatable="false">6927320204-qs5d0fn8qluksg8ktv72s4f38jrjrjra.apps.googleusercontent.com</string>
+    <string name="title_login_failed">Login Failed</string>
+    <string name="msg_login_failed">User you are trying to sign in with is not found. Try to login again.</string>
+    <string name="msg_log_out_confirm">Are you sure you want to log out?</string>
+    <string name="title_log_out_confirm">Log Out</string>
+    <string name="nav_log_out">Log Out</string>
+    <string name="nav_predict_list">Predictions</string>
 </resources>
