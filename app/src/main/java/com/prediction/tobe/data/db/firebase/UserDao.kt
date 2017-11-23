@@ -1,20 +1,21 @@
 package com.prediction.tobe.data.db.firebase
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import com.prediction.tobe.di.DependencyManager
+import com.google.firebase.database.*
 import com.prediction.tobe.domain.UserBean
 import rx.Observable
 import rx.subjects.PublishSubject
 import javax.inject.Inject
-import javax.inject.Named
 
 class UserDao @Inject constructor() : IUserDao {
+    companion object {
+        private const val NODE_NAME_USERS = "users"
+    }
 
-   @field:[Inject Named(DependencyManager.DB_USERS)]
-    lateinit var userDB: DatabaseReference
+    val userDB: DatabaseReference
+
+    init {
+        userDB = FirebaseDatabase.getInstance().getReference(NODE_NAME_USERS)
+    }
 
     override fun getUserById(userId: String): Observable<UserBean> {
         val subjectUser: PublishSubject<UserBean> = PublishSubject.create()
@@ -30,6 +31,7 @@ class UserDao @Inject constructor() : IUserDao {
                     subjectUser.onError(UserNotFoundException("User Data Snapshot does not exist!"))
                 }
             }
+
             override fun onCancelled(err: DatabaseError?) {
                 subjectUser.onError(err?.toException())
             }

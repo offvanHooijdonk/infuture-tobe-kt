@@ -17,7 +17,6 @@ class DependencyManager(ctx: Context) {
             .appModule(AppModule(ctx))
             .firebaseAuthModule(FirebaseAuthModule())
             .daoModule(DaoModule())
-            .firebaseDBModule(FirebaseDBModule())
             .build()
 
     fun loginComponent(): LoginComponent = graph.plusAuthComponent(AuthModule()).plusLoginComponent(LoginModule())

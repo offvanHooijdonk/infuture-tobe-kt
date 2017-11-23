@@ -6,7 +6,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.prediction.tobe.data.auth.FireBaseAuthUtil
-import com.prediction.tobe.data.db.firebase.IUserDao
+import com.prediction.tobe.data.db.firebase.UserDao
 import com.prediction.tobe.domain.UserBean
 import com.prediction.tobe.session.SessionHelper
 import rx.Observable
@@ -25,7 +25,7 @@ class AuthInteractor @Inject constructor() {
     lateinit var firebaseAuth: FirebaseAuth
 
     @Inject
-    lateinit var userDao: IUserDao
+    lateinit var userDao: UserDao
 
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
