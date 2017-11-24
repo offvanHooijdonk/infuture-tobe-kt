@@ -1,13 +1,17 @@
 package com.prediction.tobe.presentation.ui.main
 
 import android.app.Fragment
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import com.prediction.tobe.AppToBe
 import com.prediction.tobe.R
 import com.prediction.tobe.presentation.presenter.MainPresenter
+import com.prediction.tobe.presentation.ui.predict.edit.PredictEditActivity
 import com.prediction.tobe.presentation.ui.predict.list.PredictListFragment
 import com.prediction.tobe.session.SessionHelper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,6 +46,19 @@ class MainActivity : AppCompatActivity(), IMainView {
         navigateFromDrawer(NavOptions.LIST_ALL)
 
         presenter.onViewInit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.nav_add_predict -> startActivity(Intent(this, PredictEditActivity::class.java))
+        }
+
+        return true
     }
 
     private fun initDrawer() {

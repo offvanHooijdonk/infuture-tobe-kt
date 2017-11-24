@@ -12,4 +12,5 @@
     <string name="title_log_out_confirm">Log Out</string>
     <string name="nav_log_out">Log Out</string>
     <string name="nav_predict_list">Predictions</string>
+    <string name="menu_add_prediction">Add</string>
 </resources>
