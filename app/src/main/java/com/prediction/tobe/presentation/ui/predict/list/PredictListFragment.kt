@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.prediction.tobe.R
+import com.prediction.tobe.domain.Answer
 import com.prediction.tobe.domain.PredictBean
 import kotlinx.android.synthetic.main.f_predict_list.*
 import java.util.*
@@ -27,7 +28,7 @@ class PredictListFragment : Fragment(), IPredictListView {
         adapter = PredictListAdapter(initTempList())
         rvPredicts.adapter = adapter
         rvPredicts.layoutManager = LinearLayoutManager(ctx)
-        rvPredicts.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        rvPredicts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
@@ -40,9 +41,9 @@ class PredictListFragment : Fragment(), IPredictListView {
     }
 
     private fun initTempList() = mutableListOf(
-            PredictBean(1, "Temp text fish here", Date().time, 2, true),
-            PredictBean(2, "Another text Lorem ipsum that's fine", Date().time, 40, false),
-            PredictBean(5, "Thay will be enough let's have this many", Date().time, 1200, false)
+            PredictBean(1, "Temp text fish here", Date().time, 2, Answer.YES, true),
+            PredictBean(2, "Another text Lorem ipsum that's fine", Date().time, 40, Answer.NO, false),
+            PredictBean(5, "Thay will be enough let's have this many", Date().time, 1200, Answer.NO, false)
     )
 
 }
