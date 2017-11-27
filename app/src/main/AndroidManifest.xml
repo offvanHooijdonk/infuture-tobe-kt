@@ -15,10 +15,6 @@
             android:name=".presentation.ui.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
         </activity>
         <activity
             android:name=".presentation.ui.login.LoginActivity"
@@ -28,7 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.predict.edit.PredictEditActivity" />
+        <activity
+            android:name=".presentation.ui.predict.edit.PredictEditActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

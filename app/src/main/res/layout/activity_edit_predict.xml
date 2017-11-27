@@ -3,39 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_v_margin"
-    android:paddingEnd="@dimen/activity_h_margin"
-    android:paddingStart="@dimen/activity_h_margin"
-    android:paddingTop="@dimen/activity_v_margin">
+    android:background="@color/backSolid">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_v_margin"
+        android:paddingEnd="@dimen/activity_h_margin"
+        android:paddingStart="@dimen/activity_h_margin"
+        android:paddingTop="@dimen/activity_v_margin">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:theme="@style/OnColoredBack.TextInputLayout"
+            app:errorTextAppearance="@style/ErrorOnBackAppearance">
 
             <EditText
                 android:id="@+id/inputText"
+                style="@style/OnColoredBack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Prediction text" />
         </android.support.design.widget.TextInputLayout>
 
         <TextView
+            style="@style/OnColoredBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textAlignment="center"
-            android:text="Add image here"/>
+            android:layout_marginTop="20dp"
+            android:text="Add image here"
+            android:textAlignment="center" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/OnColoredBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Question resolves on" />
+
+            <TextView
+                android:id="@+id/txtDateTill"
+                style="@style/OnColoredBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="10 May 2018 12:20" />
+        </LinearLayout>
 
         <TextView
+            style="@style/OnColoredBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_v_margin"
             android:text="Pick your answer" />
 
         <RadioGroup
@@ -44,20 +72,22 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/radioPositive"
+                style="@style/OnColoredBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Positive"
                 android:buttonTint="@color/answer_positive"
-                android:textColor="@color/answer_positive"/>
+                android:text="Positive" />
 
             <RadioButton
+                android:id="@+id/radioNegative"
+                style="@style/OnColoredBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Negative"
-                android:buttonTint="@color/answer_negative"
-                android:textColor="@color/answer_negative"/>
+                android:buttonTint="@color/answer_negative_on_colored"
+                android:text="Negative" />
         </RadioGroup>
     </LinearLayout>
 

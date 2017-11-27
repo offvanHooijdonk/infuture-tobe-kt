@@ -1,12 +1,20 @@
 package com.prediction.tobe.domain
 
-data class PredictBean(val id: Int, val text: String, val dateWhen: Long, val likeCount: Long, val likedByUser: Boolean) {
+import java.util.*
 
-    override fun equals(other: Any?): Boolean {
-        return other is PredictBean && other.id == id
-    }
+data class PredictBean(val id: Int?,
+                       val text: String,
+                       val dateWhen: Long,
+                       val likeCount: Long,
+                       val ownerAnswer: Answer,
+                       val likedByUser: Boolean) {
 
-    override fun hashCode(): Int {
-        return id
-    }
+    override fun equals(other: Any?): Boolean =
+            other is PredictBean && other.id == id
+
+    override fun hashCode(): Int = id ?: Objects.hashCode(text)
+}
+
+enum class Answer {
+    YES, NO
 }

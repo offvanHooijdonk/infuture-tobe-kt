@@ -2,6 +2,7 @@
     <string name="app_name">To Be</string>
     <string name="nav_drawer_open" translatable="false">open</string>
     <string name="nav_drawer_close" translatable="false">close</string>
+
     <string name="fish_username">John Doe</string>
     <string name="btn_login">Log In</string>
     <string name="login_options_or">or</string>
@@ -11,6 +12,9 @@
     <string name="msg_log_out_confirm">Are you sure you want to log out?</string>
     <string name="title_log_out_confirm">Log Out</string>
     <string name="nav_log_out">Log Out</string>
+
     <string name="nav_predict_list">Predictions</string>
     <string name="menu_add_prediction">Add</string>
+    <string name="valid_error_text_empty">Please input your predict.</string>
+    <string name="datetime_template">%s %s</string>
 </resources>
