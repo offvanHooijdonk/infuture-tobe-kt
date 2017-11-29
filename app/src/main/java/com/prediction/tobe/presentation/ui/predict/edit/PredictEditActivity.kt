@@ -9,7 +9,6 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import com.prediction.tobe.AppToBe
 import com.prediction.tobe.R
-import com.prediction.tobe.domain.Answer
 import com.prediction.tobe.domain.PredictBean
 import com.prediction.tobe.presentation.presenter.PredictEditPresenter
 import kotlinx.android.synthetic.main.activity_edit_predict.*
@@ -54,13 +53,13 @@ class PredictEditActivity : AppCompatActivity(), IPredictEditView, DatePickerDia
         }
 
         if (!radioPositive.isChecked && !radioNegative.isChecked) {
-            radioPositive.error = "Pick Any Option"
+            // todo show some error message
             isValid = false
         }
 
         if (isValid) {
             predictBean = PredictBean(null, inputText.text.toString(), predictDate.timeInMillis, 0,
-                    if (radioPositive.isChecked) Answer.YES else Answer.NO, false)
+                    if (radioPositive.isChecked) PredictBean.Answer.YES else PredictBean.Answer.NO, false)
         }
 
         return isValid

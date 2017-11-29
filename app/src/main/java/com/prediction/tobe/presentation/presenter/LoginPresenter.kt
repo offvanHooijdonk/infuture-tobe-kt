@@ -9,7 +9,6 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseUser
 import com.prediction.tobe.data.db.firebase.UserNotFoundException
 import com.prediction.tobe.data.interactor.AuthInteractor
-import com.prediction.tobe.domain.UserBean
 import com.prediction.tobe.presentation.ui.login.ILoginView
 import com.prediction.tobe.session.SessionHelper
 import javax.inject.Inject
@@ -77,7 +76,4 @@ class LoginPresenter @Inject constructor() : ILoginPresenter {
         }
     }
 
-    // todo move this to a Model Converter
-    private fun toUserBean(fu: FirebaseUser): UserBean =
-            UserBean(fu.uid, fu.displayName, fu.photoUrl?.toString(), fu.email)
 }

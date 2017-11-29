@@ -17,6 +17,9 @@ class UserDao @Inject constructor() : IUserDao {
         userDB = FirebaseDatabase.getInstance().getReference(NODE_NAME_USERS)
     }
 
+    /**
+     * @throws UserNotFoundException into <code>Observable</code>
+     */
     override fun getUserById(userId: String): Observable<UserBean> {
         val subjectUser: PublishSubject<UserBean> = PublishSubject.create()
 

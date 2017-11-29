@@ -7,14 +7,16 @@ data class PredictBean(val id: Int?,
                        val dateWhen: Long,
                        val likeCount: Long,
                        val ownerAnswer: Answer,
-                       val likedByUser: Boolean) {
+                       val likedByUser: Boolean,
+                       val active: Boolean = true) {
 
     override fun equals(other: Any?): Boolean =
             other is PredictBean && other.id == id
 
     override fun hashCode(): Int = id ?: Objects.hashCode(text)
+
+    enum class Answer {
+        YES, NO
+    }
 }
 
-enum class Answer {
-    YES, NO
-}

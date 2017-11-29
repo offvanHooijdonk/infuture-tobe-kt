@@ -6,6 +6,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.prediction.tobe.data.auth.FireBaseAuthUtil
+import com.prediction.tobe.data.converter.toUserBean
 import com.prediction.tobe.data.db.firebase.UserDao
 import com.prediction.tobe.domain.UserBean
 import com.prediction.tobe.session.SessionHelper
@@ -39,7 +40,8 @@ class AuthInteractor @Inject constructor() {
             if (account != null) {
                 authUtil.authWithGoogle(account)
                         .map { toUserBean(it) }
-                        .flatMap { updateUserInDB(it) }
+                        .flatMap { userDao.updateUserInDB(it) }
+                        .doOnNext { session.user = it }
             } else {
                 excAsObservable(Exception("Google account returned null despite successful Sign In"))
             }
@@ -59,13 +61,7 @@ class AuthInteractor @Inject constructor() {
     private fun loadUserInfoById(userId: String) : Observable<UserBean> =
             userDao.getUserById(userId).doOnNext { session.user = it }
 
-    // todo move this to a Model Converter
-    private fun toUserBean(fu: FirebaseUser): UserBean =
-            UserBean(fu.uid, fu.displayName, fu.photoUrl?.toString(), fu.email)
-
     private fun <T> excAsObservable(exception: Exception): Observable<T> =
             PublishSubject.error(exception)
 
-    private fun updateUserInDB(userBean: UserBean): Observable<UserBean> =
-            userDao.updateUserInDB(userBean).doOnNext { session.user = it }
 }
