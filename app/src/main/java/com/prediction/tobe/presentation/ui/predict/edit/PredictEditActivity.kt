@@ -59,8 +59,7 @@ class PredictEditActivity : AppCompatActivity(), IPredictEditView, DatePickerDia
         }
 
         if (isValid) {
-            predictModel = PredictModel(null, inputText.text.toString(), predictDate.timeInMillis, 0,
-                    if (radioPositive.isChecked) PredictModel.Answer.YES else PredictModel.Answer.NO, false)
+            predictModel = PredictModel(null, inputText.text.toString(), predictDate.timeInMillis, true)
         }
 
         return isValid

@@ -17,4 +17,5 @@
     <string name="menu_add_prediction">Add</string>
     <string name="valid_error_text_empty">Please input your predict.</string>
     <string name="datetime_template">%s %s</string>
+    <string name="fish">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
 </resources>

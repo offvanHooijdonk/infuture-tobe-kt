@@ -5,11 +5,8 @@ import java.util.*
 data class PredictModel(var id: String?,
                         var text: String,
                         var dateWhen: Long,
-                        var likeCount: Long,
-                        var ownerAnswer: Answer,
-                        var likedByUser: Boolean,
                         var active: Boolean = true) {
-    constructor() : this(null, "", 0, 0, Answer.NO, false, false)
+    constructor() : this(null, "", 0, true)
 
     override fun equals(other: Any?): Boolean =
             other is PredictModel && other.id == id
