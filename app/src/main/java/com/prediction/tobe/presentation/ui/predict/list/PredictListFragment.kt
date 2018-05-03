@@ -8,25 +8,37 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.prediction.tobe.AppToBe
 import com.prediction.tobe.R
-import com.prediction.tobe.domain.PredictBean
+import com.prediction.tobe.domain.dto.PredictDto
+import com.prediction.tobe.presentation.presenter.PredictListPresenter
 import kotlinx.android.synthetic.main.f_predict_list.*
-import java.util.*
+import org.jetbrains.anko.longToast
+import javax.inject.Inject
 
 class PredictListFragment : Fragment(), IPredictListView {
+
+    @Inject
+    lateinit var presenter: PredictListPresenter
+
     private lateinit var adapter: PredictListAdapter
     private lateinit var ctx: Context
+    private val predictList = mutableListOf<PredictDto>()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater!!.inflate(R.layout.f_predict_list, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ctx = activity
 
-        adapter = PredictListAdapter(initTempList())
+        AppToBe.di.predictComponent().inject(this)
+        ctx = activity
+        presenter.attachView(this)
+
+        adapter = PredictListAdapter(predictList)
         rvPredicts.adapter = adapter
         rvPredicts.layoutManager = LinearLayoutManager(ctx)
+
         rvPredicts.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -39,10 +51,21 @@ class PredictListFragment : Fragment(), IPredictListView {
         })
     }
 
-    private fun initTempList() = listOf(
-            PredictBean(1, "Temp text fish here", Date().time, 2, PredictBean.Answer.YES, true),
-            PredictBean(2, "Another text Lorem ipsum that's fine", Date().time, 40, PredictBean.Answer.NO, false),
-            PredictBean(5, "That will be enough let's have this many", Date().time, 1200, PredictBean.Answer.NO, false)
-    )
+    override fun onStart() {
+        super.onStart()
 
+        presenter.loadPredicts()
+    }
+
+    override fun onPredictsLoaded(predicts: List<PredictDto>) {
+        predictList.clear()
+        predictList.addAll(predicts)
+        longToast("ListLoaded")
+
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun onLoadError(th: Throwable) {
+        longToast("Error! " + th.toString())
+    }
 }

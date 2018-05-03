@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.prediction.tobe.data.auth.FireBaseAuthUtil
 import com.prediction.tobe.data.converter.toUserBean
 import com.prediction.tobe.data.db.firebase.UserDao
-import com.prediction.tobe.domain.UserBean
+import com.prediction.tobe.domain.model.UserModel
 import com.prediction.tobe.session.SessionHelper
 import rx.Observable
 import rx.subjects.PublishSubject
@@ -32,7 +32,7 @@ class AuthInteractor @Inject constructor() {
 
     fun getSignInOptions(): GoogleSignInOptions = authUtil.getSignInOptions()
 
-    fun signInWithGoogle(data: Intent): Observable<UserBean> {
+    fun signInWithGoogle(data: Intent): Observable<UserModel> {
         val result: GoogleSignInResult = authUtil.signInWithGoogleForResult(data)
 
         return if (result.isSuccess) {
@@ -50,15 +50,15 @@ class AuthInteractor @Inject constructor() {
         }
     }
 
-    fun loadUserInfo(userBean: UserBean) : Observable<UserBean> = loadUserInfoById(userBean.id)
+    fun loadUserInfo(userModel: UserModel) : Observable<UserModel> = loadUserInfoById(userModel.id)
 
-    fun loadUserInfo(userBean: FirebaseUser) : Observable<UserBean> = loadUserInfoById(userBean.uid)
+    fun loadUserInfo(userBean: FirebaseUser) : Observable<UserModel> = loadUserInfoById(userBean.uid)
 
     fun signOut() {
         firebaseAuth.signOut()
     }
 
-    private fun loadUserInfoById(userId: String) : Observable<UserBean> =
+    private fun loadUserInfoById(userId: String) : Observable<UserModel> =
             userDao.getUserById(userId).doOnNext { session.user = it }
 
     private fun <T> excAsObservable(exception: Exception): Observable<T> =

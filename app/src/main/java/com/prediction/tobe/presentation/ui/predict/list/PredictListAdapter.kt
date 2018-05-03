@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.prediction.tobe.R
-import com.prediction.tobe.domain.PredictBean
+import com.prediction.tobe.domain.dto.PredictDto
 import kotlinx.android.synthetic.main.item_predict.view.*
 
-class PredictListAdapter constructor(private val list: List<PredictBean>) : RecyclerView.Adapter<PredictListAdapter.ViewHolder>() {
+class PredictListAdapter constructor(private val list: List<PredictDto>) : RecyclerView.Adapter<PredictListAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
             ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_predict, parent, false))
 
@@ -19,8 +20,8 @@ class PredictListAdapter constructor(private val list: List<PredictBean>) : Recy
     override fun getItemCount(): Int = list.size
 
     class ViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
-        fun bindData(bean: PredictBean) {
-            itemView.txtPredictText.text = bean.text
+        fun bindData(dto: PredictDto) {
+            itemView.txtPredictText.text = dto.predictModel.text
         }
     }
 }

@@ -1,7 +1,8 @@
 package com.prediction.tobe.data.db.firebase
 
 import com.google.firebase.database.*
-import com.prediction.tobe.domain.UserBean
+import com.prediction.tobe.data.db.IUserDao
+import com.prediction.tobe.domain.model.UserModel
 import rx.Observable
 import rx.subjects.PublishSubject
 import javax.inject.Inject
@@ -11,7 +12,7 @@ class UserDao @Inject constructor() : IUserDao {
         private const val NODE_NAME_USERS = "users"
     }
 
-    val userDB: DatabaseReference
+    private val userDB: DatabaseReference
 
     init {
         userDB = FirebaseDatabase.getInstance().getReference(NODE_NAME_USERS)
@@ -20,13 +21,13 @@ class UserDao @Inject constructor() : IUserDao {
     /**
      * @throws UserNotFoundException into <code>Observable</code>
      */
-    override fun getUserById(userId: String): Observable<UserBean> {
-        val subjectUser: PublishSubject<UserBean> = PublishSubject.create()
+    override fun getUserById(userId: String): Observable<UserModel> {
+        val subjectUser: PublishSubject<UserModel> = PublishSubject.create()
 
         userDB.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot?) {
                 if (dataSnapshot != null && dataSnapshot.exists()) {
-                    val userFound: UserBean? = dataSnapshot.getValue(UserBean::class.java)
+                    val userFound: UserModel? = dataSnapshot.getValue(UserModel::class.java)
                     if (userFound != null) {
                         subjectUser.onNext(userFound)
                     }
@@ -35,17 +36,17 @@ class UserDao @Inject constructor() : IUserDao {
                 }
             }
 
-            override fun onCancelled(err: DatabaseError?) {
-                subjectUser.onError(err?.toException())
+            override fun onCancelled(dbErr: DatabaseError?) {
+                subjectUser.onError(dbErr?.toException().also { it?.message?.plus("Error getting User Info")})
             }
         })
         return subjectUser
     }
 
-    override fun updateUserInDB(userBean: UserBean): Observable<UserBean> {
-        val subjectUser: PublishSubject<UserBean> = PublishSubject.create()
-        userDB.child(userBean.id).setValue(userBean).addOnCompleteListener {
-            subjectUser.onNext(userBean)
+    override fun updateUserInDB(userModel: UserModel): Observable<UserModel> {
+        val subjectUser: PublishSubject<UserModel> = PublishSubject.create()
+        userDB.child(userModel.id).setValue(userModel).addOnCompleteListener {
+            subjectUser.onNext(userModel)
         }
         return subjectUser
     }

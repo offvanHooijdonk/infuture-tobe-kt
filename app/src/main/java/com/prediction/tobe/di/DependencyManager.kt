@@ -11,9 +11,6 @@ import com.prediction.tobe.di.presentation.predict.PredictModule
 import com.prediction.tobe.di.uitl.AuthModule
 
 class DependencyManager(ctx: Context) {
-    companion object {
-        const val DB_USERS = "database_reference_users"
-    }
 
     private val graph: AppComponent = DaggerAppComponent.builder()
             .appModule(AppModule(ctx))

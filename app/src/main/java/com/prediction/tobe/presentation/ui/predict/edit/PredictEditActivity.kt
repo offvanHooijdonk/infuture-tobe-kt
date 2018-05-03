@@ -9,9 +9,10 @@ import android.widget.DatePicker
 import android.widget.TimePicker
 import com.prediction.tobe.AppToBe
 import com.prediction.tobe.R
-import com.prediction.tobe.domain.PredictBean
+import com.prediction.tobe.domain.model.PredictModel
 import com.prediction.tobe.presentation.presenter.PredictEditPresenter
 import kotlinx.android.synthetic.main.activity_edit_predict.*
+import org.jetbrains.anko.longToast
 import java.util.*
 import java.util.Calendar.HOUR_OF_DAY
 import java.util.Calendar.MINUTE
@@ -22,7 +23,7 @@ class PredictEditActivity : AppCompatActivity(), IPredictEditView, DatePickerDia
     @Inject
     lateinit var presenter: PredictEditPresenter
 
-    private lateinit var predictBean: PredictBean
+    private lateinit var predictModel: PredictModel
     private val predictDate: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,7 @@ class PredictEditActivity : AppCompatActivity(), IPredictEditView, DatePickerDia
         fabSave.setOnClickListener({
             if (validateAndPopulatePredictBean()) {
                 it.isEnabled = false
-                presenter.onSubmitForm(predictBean)
+                presenter.savePredict(predictModel)
             }
         })
 
@@ -58,8 +59,8 @@ class PredictEditActivity : AppCompatActivity(), IPredictEditView, DatePickerDia
         }
 
         if (isValid) {
-            predictBean = PredictBean(null, inputText.text.toString(), predictDate.timeInMillis, 0,
-                    if (radioPositive.isChecked) PredictBean.Answer.YES else PredictBean.Answer.NO, false)
+            predictModel = PredictModel(null, inputText.text.toString(), predictDate.timeInMillis, 0,
+                    if (radioPositive.isChecked) PredictModel.Answer.YES else PredictModel.Answer.NO, false)
         }
 
         return isValid
@@ -83,6 +84,17 @@ class PredictEditActivity : AppCompatActivity(), IPredictEditView, DatePickerDia
                 DateFormat.getMediumDateFormat(this).format(predictDate.time),
                 DateFormat.getTimeFormat(this).format(predictDate.time))
     }
+
+    override fun onPredictSaved() {
+        // todo close popup
+        longToast("Saved.")
+        this.finish()
+    }
+
+    override fun onSaveError(throwable: Throwable) {
+        longToast("Error Saving! " + throwable.toString())
+    }
+
 
     private fun showDateTimePicker() {
         val startDate = Calendar.getInstance()

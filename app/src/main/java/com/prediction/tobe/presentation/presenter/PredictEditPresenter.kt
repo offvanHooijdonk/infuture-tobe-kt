@@ -1,7 +1,7 @@
 package com.prediction.tobe.presentation.presenter
 
 import com.prediction.tobe.data.interactor.PredictInteractor
-import com.prediction.tobe.domain.PredictBean
+import com.prediction.tobe.domain.model.PredictModel
 import com.prediction.tobe.presentation.ui.predict.edit.IPredictEditView
 import javax.inject.Inject
 
@@ -15,7 +15,8 @@ class PredictEditPresenter @Inject constructor() : IPredictEditPresenter {
         this.view = view
     }
 
-    override fun onSubmitForm(predictBean: PredictBean) {
-
+    override fun savePredict(predictModel: PredictModel) {
+        interactor.savePredict(predictModel).subscribe({ view.onPredictSaved() },  { view.onSaveError(it) })
     }
+
 }
