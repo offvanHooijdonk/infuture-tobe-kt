@@ -10,6 +10,8 @@
     <color name="answer_positive_on_colored">@color/md_green_A700</color>
     <color name="answer_negative">@color/md_red_A400</color>
     <color name="answer_negative_on_colored">@color/md_red_A200</color>
+    <color name="badge_active">@color/favorite_on</color>
+    <color name="badge_inactive">@color/icon_off</color>
     <color name="favorite_on">@color/md_blue_600</color>
     <color name="icon_off">@color/md_grey_500</color>
 </resources>

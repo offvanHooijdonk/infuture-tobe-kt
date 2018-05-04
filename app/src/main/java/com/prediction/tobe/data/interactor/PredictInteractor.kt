@@ -26,4 +26,5 @@ class PredictInteractor @Inject constructor() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
 
+
 }

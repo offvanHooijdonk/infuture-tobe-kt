@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BadgeNumberView">
+        <attr name="src" format="reference"/>
+        <attr name="imageSize" format="dimension"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="numberValue" format="integer"/>
+        <attr name="activeColor" format="color"/>
+        <attr name="state" format="enum">
+            <enum name="inactive" value="0"/>
+            <enum name="active" value="1"/>
+        </attr>
+        <attr name="orientation">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>

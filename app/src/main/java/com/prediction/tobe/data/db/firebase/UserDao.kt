@@ -37,7 +37,7 @@ class UserDao @Inject constructor() : IUserDao {
             }
 
             override fun onCancelled(dbErr: DatabaseError?) {
-                subjectUser.onError(dbErr?.toException().also { it?.message?.plus("Error getting User Info")})
+                subjectUser.onError(dbErr?.toException()?.apply { message?.plus("Error getting User Info")})
             }
         })
         return subjectUser

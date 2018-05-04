@@ -37,6 +37,7 @@ dependencies {
     compile "com.android.support:support-v4:$support_version"
     compile "com.android.support:design:$support_version"
     compile 'com.android.support.constraint:constraint-layout:1.1.0'
+    compile project(":views")
 
     compile "org.jetbrains.anko:anko-commons:$anko_version"
     /*compile "org.jetbrains.anko:anko-sdk25:$anko_version"

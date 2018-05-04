@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_v_margin"
     android:paddingEnd="@dimen/activity_h_margin"
     android:paddingStart="@dimen/activity_h_margin"
@@ -25,49 +26,31 @@
         android:orientation="horizontal"
         android:padding="4dp">
 
-        <ImageView
-            android:id="@+id/imgFav"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_favorite_24"
-            android:tint="@color/favorite_on" />
-
-        <TextView
-            android:id="@+id/txtLikesNumber"
+        <com.prediction.tobe.views.BadgeNumberView
+            android:id="@+id/badgeLikes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="14.3 k" />
+            app:src="@drawable/ic_favorite_24"
+            app:orientation="horizontal"
+            app:state="active"/>
 
-        <ImageView
-            android:id="@+id/imgPositive"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
+        <com.prediction.tobe.views.BadgeNumberView
+            android:id="@+id/badgePositives"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:src="@drawable/ic_thumb_up_24"
-            android:tint="@color/answer_positive" />
+            app:src="@drawable/ic_thumb_up_24"
+            app:orientation="horizontal"
+            app:state="active"/>
 
-        <TextView
-            android:id="@+id/txtPositiveNumber"
+        <com.prediction.tobe.views.BadgeNumberView
+            android:id="@+id/badgeNegatives"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="217.5 k" />
-
-        <ImageView
-            android:id="@+id/imgNegative"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/ic_thumb_down_24"
-            android:tint="@color/answer_negative" />
-
-        <TextView
-            android:id="@+id/txtNegativeNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="678" />
+            app:src="@drawable/ic_thumb_down_24"
+            app:orientation="horizontal"
+            app:state="active"/>
 
     </LinearLayout>
 </RelativeLayout>

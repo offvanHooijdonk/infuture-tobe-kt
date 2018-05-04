@@ -39,7 +39,7 @@ class PredictDao : IPredictDao {
             }
 
             override fun onCancelled(dbError: DatabaseError?) {
-                subjPredicts.onError(dbError?.toException().also { it?.message?.plus("Error getting Latest Predicts.") })
+                subjPredicts.onError(dbError?.toException()?.apply { message?.plus("Error getting Latest Predicts.") })
             }
         })
 
@@ -54,7 +54,7 @@ class PredictDao : IPredictDao {
                 subj.onNext(null)
                 subj.onCompleted()
             } else {
-                subj.onError(dbError.toException().also { it?.message?.plus("Error saving Predict: " + predictModel.toString()) })
+                subj.onError(dbError.toException()?.apply { message?.plus("Error saving Predict: " + predictModel.toString()) })
             }
         }
 
