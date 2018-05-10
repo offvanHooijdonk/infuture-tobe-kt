@@ -6,6 +6,7 @@
         <attr name="textSize" format="dimension"/>
         <attr name="numberValue" format="integer"/>
         <attr name="activeColor" format="color"/>
+        <attr name="inactiveColor" format="color"/>
         <attr name="state" format="enum">
             <enum name="inactive" value="0"/>
             <enum name="active" value="1"/>

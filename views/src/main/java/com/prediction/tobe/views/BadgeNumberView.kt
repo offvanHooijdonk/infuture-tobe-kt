@@ -28,6 +28,8 @@ class BadgeNumberView(context: Context?, attrs: AttributeSet?) : FrameLayout(con
     private lateinit var badgeDrawable: Drawable
     private var textSize: Int = 0
     private var state: Int = 0
+    private var activeColor: Int = 0
+    private var inactiveColor: Int = 0
     private var numberValue: Long = 0
 
     private lateinit var txtBadgeNumber: TextView
@@ -41,6 +43,8 @@ class BadgeNumberView(context: Context?, attrs: AttributeSet?) : FrameLayout(con
             state = ta.getInt(R.styleable.BadgeNumberView_state, STATE_INACTIVE)
             orientation = ta.getInt(R.styleable.BadgeNumberView_orientation, ORIENTATION_H)
             badgeDrawable = ta.getDrawable(R.styleable.BadgeNumberView_src) ?: getContext().getDrawable(R.drawable.ic_star_24)
+            activeColor = ta.getColor(R.styleable.BadgeNumberView_activeColor, resources.getColor(R.color.badge_active))
+            inactiveColor = ta.getColor(R.styleable.BadgeNumberView_inactiveColor, resources.getColor(R.color.badge_inactive))
             numberValue = ta.getInteger(R.styleable.BadgeNumberView_numberValue, NUMBER_FISH).toLong()
         } catch (e: Exception) {
         } finally {
@@ -68,8 +72,7 @@ class BadgeNumberView(context: Context?, attrs: AttributeSet?) : FrameLayout(con
     }
 
     private fun updateState() {
-        val colorResource = if (state == STATE_ACTIVE) R.color.badge_active else R.color.badge_inactive
-        val color = context.resources.getColor(colorResource)
+        val color = if (state == STATE_ACTIVE) activeColor else inactiveColor
 
         imgBadgeIcon.setColorFilter(color)
         txtBadgeNumber.setTextColor(color)
@@ -90,6 +93,10 @@ class BadgeNumberView(context: Context?, attrs: AttributeSet?) : FrameLayout(con
 
     private fun updateNumberValue() {
         txtBadgeNumber.text = formatter.formatNumber(numberValue)
+    }
+
+    private fun updateActiveColor() {
+        updateState()
     }
 
     private fun updateBadgeDrawable() {
@@ -134,6 +141,16 @@ class BadgeNumberView(context: Context?, attrs: AttributeSet?) : FrameLayout(con
 
     fun getBadgeDrawable(): Drawable {
         return badgeDrawable
+    }
+
+    fun setActiveColor(color: Int) {
+        this.activeColor = color
+        updateActiveColor()
+    }
+
+    fun setInactiveColor(color: Int) {
+        this.inactiveColor = color
+        updateActiveColor()
     }
 
     fun setBadgeDrawable(badgeDrawable: Drawable) {

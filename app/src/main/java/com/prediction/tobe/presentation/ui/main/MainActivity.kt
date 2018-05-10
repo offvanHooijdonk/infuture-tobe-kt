@@ -13,7 +13,7 @@ import com.prediction.tobe.R
 import com.prediction.tobe.presentation.presenter.MainPresenter
 import com.prediction.tobe.presentation.ui.predict.edit.PredictEditActivity
 import com.prediction.tobe.presentation.ui.predict.list.PredictListFragment
-import com.prediction.tobe.session.SessionHelper
+import com.prediction.tobe.helper.session.SessionHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import org.jetbrains.anko.alert

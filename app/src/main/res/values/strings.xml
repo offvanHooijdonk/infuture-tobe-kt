@@ -18,4 +18,12 @@
     <string name="valid_error_text_empty">Please input your predict.</string>
     <string name="datetime_template">%s %s</string>
     <string name="fish">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="fish_date_time">22/05/2018 14:00</string>
+    <string name="predict_title_hint">Prediction text</string>
+    <string name="add_image_btn">Add image here</string>
+    <string name="predict_expires_on">Question resolves on</string>
+    <string name="answer_positive_title">Sure!</string>
+    <string name="answer_negative_title">Nope</string>
+    <string name="pick_date_btn">Pick</string>
+    <string name="pick_answer_hint">Pick your answer</string>
 </resources>

@@ -9,7 +9,7 @@ import com.prediction.tobe.data.auth.FireBaseAuthUtil
 import com.prediction.tobe.data.converter.toUserBean
 import com.prediction.tobe.data.db.firebase.UserDao
 import com.prediction.tobe.domain.model.UserModel
-import com.prediction.tobe.session.SessionHelper
+import com.prediction.tobe.helper.session.SessionHelper
 import rx.Observable
 import rx.subjects.PublishSubject
 import java.lang.Exception

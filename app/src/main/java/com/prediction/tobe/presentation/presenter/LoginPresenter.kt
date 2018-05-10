@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.prediction.tobe.data.db.firebase.UserNotFoundException
 import com.prediction.tobe.data.interactor.AuthInteractor
 import com.prediction.tobe.presentation.ui.login.ILoginView
-import com.prediction.tobe.session.SessionHelper
+import com.prediction.tobe.helper.session.SessionHelper
 import javax.inject.Inject
 
 class LoginPresenter @Inject constructor() : ILoginPresenter {

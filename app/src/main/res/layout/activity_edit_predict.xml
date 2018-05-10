@@ -26,17 +26,17 @@
                 style="@style/OnColoredBack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Prediction text" />
+                android:hint="@string/predict_title_hint" />
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            style="@style/OnColoredBack"
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
-            android:text="Add image here"
-            android:textAlignment="center" />
+            android:text="@string/add_image_btn"
+            android:textColor="@color/md_white_1000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,18 +45,26 @@
 
             <TextView
                 style="@style/OnColoredBack"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Question resolves on" />
+                android:text="@string/predict_expires_on" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/pick_date_btn"
+                android:textColor="@color/md_white_1000" />
 
             <TextView
                 android:id="@+id/txtDateTill"
                 style="@style/OnColoredBack"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="10 May 2018 12:20" />
+                android:visibility="gone" />
         </LinearLayout>
 
         <TextView
@@ -64,11 +72,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_v_margin"
-            android:text="Pick your answer" />
+            android:text="@string/pick_answer_hint" />
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -78,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/answer_positive"
-                android:text="Positive" />
+                android:text="@string/answer_positive_title" />
 
             <RadioButton
                 android:id="@+id/radioNegative"
@@ -87,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/answer_negative_on_colored"
-                android:text="Negative" />
+                android:text="@string/answer_negative_title" />
         </RadioGroup>
     </LinearLayout>
 

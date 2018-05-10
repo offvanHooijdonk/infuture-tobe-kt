@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_v_margin"
     android:paddingEnd="@dimen/activity_h_margin"
     android:paddingStart="@dimen/activity_h_margin"
@@ -17,40 +17,93 @@
         android:text="@string/fish"
         android:textSize="16sp" />
 
-    <LinearLayout
+    <com.prediction.tobe.views.BadgeNumberView
+        android:id="@+id/badgeTotalVoice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtPredictText"
         android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="4dp">
+        app:orientation="horizontal"
+        app:src="@drawable/ic_thumbs_up_down_24"
+        app:state="inactive" />
 
-        <com.prediction.tobe.views.BadgeNumberView
-            android:id="@+id/badgeLikes"
+    <com.prediction.tobe.views.BadgeNumberView
+        android:id="@+id/badgeLikes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/badgeTotalVoice"
+        android:layout_below="@id/badgeTotalVoice"
+        android:layout_marginTop="8dp"
+        app:activeColor="@color/favorite_on"
+        app:inactiveColor="@color/md_blue_grey_400"
+        app:numberValue="3120"
+        app:orientation="horizontal"
+        app:src="@drawable/ic_favorite_24"
+        app:state="active" />
+
+
+    <!--    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:src="@drawable/ic_favorite_24"
-            app:orientation="horizontal"
-            app:state="active"/>
+            android:layout_below="@id/txtPredictText"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="4dp">
 
-        <com.prediction.tobe.views.BadgeNumberView
-            android:id="@+id/badgePositives"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:src="@drawable/ic_thumb_up_24"
-            app:orientation="horizontal"
-            app:state="active"/>
 
-        <com.prediction.tobe.views.BadgeNumberView
-            android:id="@+id/badgeNegatives"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:src="@drawable/ic_thumb_down_24"
-            app:orientation="horizontal"
-            app:state="active"/>
 
-    </LinearLayout>
+            <com.prediction.tobe.views.BadgeNumberView
+                android:id="@+id/badgeNegatives"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:activeColor="@color/answer_negative"
+                app:orientation="horizontal"
+                app:src="@drawable/ic_thumb_down_24"
+                app:state="active" />
+
+        </LinearLayout>-->
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignTop="@id/badgeTotalVoice"
+        android:layout_marginStart="120dp"
+        android:src="@drawable/ic_time_24"
+        android:tint="@color/md_blue_grey_400" />
+
+    <TextView
+        android:id="@+id/txtTimeExpires"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/badgeLikes"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="120dp"
+        android:text="@string/fish_date_time" />
+
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/txtPredictText"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp">
+
+        <com.timqi.sectorprogressview.SectorProgressView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:bgColor="#00000000"
+            app:fgColor="@color/answer_positive_on_colored"
+            app:percent="25"
+            app:startAngle="0" />
+
+        <com.timqi.sectorprogressview.SectorProgressView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:bgColor="#00000000"
+            app:fgColor="@color/answer_negative_on_colored"
+            app:percent="75"
+            app:startAngle="90" />
+    </FrameLayout>
 </RelativeLayout>
