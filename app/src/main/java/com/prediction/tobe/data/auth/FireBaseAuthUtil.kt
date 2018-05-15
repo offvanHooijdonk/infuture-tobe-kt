@@ -10,8 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.prediction.tobe.R
-import rx.Observable
-import rx.subjects.PublishSubject
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -38,12 +38,12 @@ class FireBaseAuthUtil @Inject constructor() {
                 .addOnCompleteListener({ task ->
                     if (task.isSuccessful) {
                         if (firebaseAuth.currentUser != null) {
-                            subjectUser.onNext(firebaseAuth.currentUser)
+                            subjectUser.onNext(firebaseAuth.currentUser!!)
                         } else {
                             subjectUser.onError(Exception("No user authorized despite successful Sign In!"))
                         }
                     } else {
-                        subjectUser.onError(task.exception)
+                        subjectUser.onError(task.exception!!)
                     }
                 })
         return subjectUser

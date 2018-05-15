@@ -1,9 +1,10 @@
 package com.prediction.tobe.helper.rx
 
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import io.reactivex.ObservableTransformer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
-fun <T> schedulers(): Observable.Transformer<T, T>? {
-    return Observable.Transformer { source -> source.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread()) }
-}
+fun <T> schedulers(): ObservableTransformer<T, T> =
+        ObservableTransformer { upstream ->
+            upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        }

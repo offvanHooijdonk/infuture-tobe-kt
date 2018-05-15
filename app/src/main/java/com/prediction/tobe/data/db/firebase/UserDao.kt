@@ -3,8 +3,8 @@ package com.prediction.tobe.data.db.firebase
 import com.google.firebase.database.*
 import com.prediction.tobe.data.db.IUserDao
 import com.prediction.tobe.domain.model.UserModel
-import rx.Observable
-import rx.subjects.PublishSubject
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class UserDao @Inject constructor() : IUserDao {
@@ -25,8 +25,8 @@ class UserDao @Inject constructor() : IUserDao {
         val subjectUser: PublishSubject<UserModel> = PublishSubject.create()
 
         userDB.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot?) {
-                if (dataSnapshot != null && dataSnapshot.exists()) {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
                     val userFound: UserModel? = dataSnapshot.getValue(UserModel::class.java)
                     if (userFound != null) {
                         subjectUser.onNext(userFound)
@@ -36,8 +36,8 @@ class UserDao @Inject constructor() : IUserDao {
                 }
             }
 
-            override fun onCancelled(dbErr: DatabaseError?) {
-                subjectUser.onError(dbErr?.toException()?.apply { message?.plus("Error getting User Info")})
+            override fun onCancelled(dbErr: DatabaseError) {
+                subjectUser.onError(dbErr.toException().apply { message?.plus("Error getting User Info")})
             }
         })
         return subjectUser

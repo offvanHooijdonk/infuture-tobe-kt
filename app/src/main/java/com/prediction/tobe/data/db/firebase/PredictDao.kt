@@ -4,8 +4,8 @@ import com.google.firebase.database.*
 import com.prediction.tobe.data.db.IPredictDao
 import com.prediction.tobe.domain.dto.PredictDto
 import com.prediction.tobe.domain.model.PredictModel
-import rx.Observable
-import rx.subjects.PublishSubject
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 class PredictDao : IPredictDao {
 
@@ -23,10 +23,10 @@ class PredictDao : IPredictDao {
         val subjPredicts: PublishSubject<List<PredictDto>> = PublishSubject.create()
 
         predictDB.limitToFirst(30).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot?) {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val predicts: MutableList<PredictDto> = ArrayList()
 
-                dataSnapshot?.children?.forEach {
+                dataSnapshot.children.forEach {
                     val model: PredictModel? = it.getValue(PredictModel::class.java)
                     model?.id = it.key
                     val likesCount: Long = it.child("likes").childrenCount
@@ -35,26 +35,26 @@ class PredictDao : IPredictDao {
                 }
 
                 subjPredicts.onNext(predicts)
-                subjPredicts.onCompleted()
+                subjPredicts.onComplete()
             }
 
-            override fun onCancelled(dbError: DatabaseError?) {
-                subjPredicts.onError(dbError?.toException()?.apply { message?.plus("Error getting Latest Predicts.") })
+            override fun onCancelled(dbError: DatabaseError) {
+                subjPredicts.onError(dbError.toException().apply { message?.plus("Error getting Latest Predicts.") })
             }
         })
 
         return subjPredicts;
     }
 
-    override fun addPredict(predictModel: PredictModel): Observable<Void> {
-        val subj: PublishSubject<Void> = PublishSubject.create()
+    override fun addPredict(predictModel: PredictModel): Observable<PredictModel> {
+        val subj: PublishSubject<PredictModel> = PublishSubject.create()
 
         predictDB.push().setValue(predictModel) { dbError, dbRef ->
             if (dbError == null) {
-                subj.onNext(null)
-                subj.onCompleted()
+                subj.onNext(predictModel)
+                subj.onComplete()
             } else {
-                subj.onError(dbError.toException()?.apply { message?.plus("Error saving Predict: " + predictModel.toString()) })
+                subj.onError(dbError.toException().apply { message?.plus("Error saving Predict: " + predictModel.toString()) })
             }
         }
 

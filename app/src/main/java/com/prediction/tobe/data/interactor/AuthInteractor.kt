@@ -10,8 +10,8 @@ import com.prediction.tobe.data.converter.toUserBean
 import com.prediction.tobe.data.db.firebase.UserDao
 import com.prediction.tobe.domain.model.UserModel
 import com.prediction.tobe.helper.session.SessionHelper
-import rx.Observable
-import rx.subjects.PublishSubject
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import java.lang.Exception
 import javax.inject.Inject
 
